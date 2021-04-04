@@ -25,6 +25,11 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 
 
+@app.context_processor
+def inject_current_year():
+    return {'current_year': date.today().year}
+
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
